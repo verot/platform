@@ -291,6 +291,9 @@
   z-index: $zindex-fixed;
   width: 20em;
 }
+.toast-body {
+  display: flex;
+}
 
 @include media-breakpoint-down(sm) {
   .toast-wrapper {
