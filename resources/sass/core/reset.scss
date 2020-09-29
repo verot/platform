@@ -36,6 +36,11 @@ a:focus {
   text-decoration: none;
 }
 
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 label {
     color: lighten($black, 20%);
     font-weight: normal;
@@ -649,6 +654,13 @@ blockquote {
   }
 }
 
+.btn-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .btn-group > .btn {
   margin-left: -1px;
 }
@@ -703,6 +715,13 @@ blockquote {
   position: absolute;
   left: 50%;
   top: 50%;
+}
+
+@mixin hover-focus() {
+  &:hover,
+  &:focus {
+    @content;
+  }
 }
 
 .dropdown-item {

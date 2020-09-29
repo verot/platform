@@ -2,7 +2,7 @@
     @foreach($users as $user)
         <a href="{{ $user->url() }}" class="avatar thumb-xs"
            data-controller="layouts--tooltip"
-           data-action="mouseover->layouts--tooltip#mouseOver"
+           data-action="mouseover->layouts--tooltip#mouseOver mouseout->layouts--tooltip#mouseOut"
            data-toggle="tooltip"
            data-placement="top"
            title="{{ $user->title() }}">

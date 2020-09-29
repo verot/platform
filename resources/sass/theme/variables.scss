@@ -34,9 +34,11 @@ $font-size-md : 1.142857 * $font-size-base;
 $font-size-sm : 0.92857 * $font-size-base;
 $font-size-xs : 0.85714 * $font-size-base;
 
+//Link
 $link-color : darken($text-color, 15%);
 $link-hover-color : darken($text-color, 30%);
 
+//Border
 $border-radius-base : 2px;
 $border-color : darken($light, 5%);
 
@@ -82,6 +84,8 @@ $app-aside-nav-height : 40px; //2,857rem;
 $app-aside-folded-width : 60px;
 $app-aside-folded-nav-height : 50px; //3.57rem;
 $app-aside-dock-media : 992px;
+
+$grid-gutter-width: 1.5rem;
 
 $scroll-bar-width : 17px;
 $butterbar-height : 3px;

@@ -5,7 +5,7 @@
     </button>
     <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
         <div class="wrapper-sm">
-            <div class="form-group mb-2 no-gutters">
+            <div class="form-group mb-2 g-0">
                 <input type="number" name="filter[{{$column}}]"
                        class="form-control form-control-sm"
                        form="filters"

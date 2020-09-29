@@ -1,5 +1,5 @@
 <div class="" data-controller="screen--filter">
-    <div class="col-md-12">
+    <div class="col-md-12 px-4">
         <div class="btn-group" role="group">
             <button class="btn btn-link dropdown-toggle pl-0"
                     data-toggle="dropdown"

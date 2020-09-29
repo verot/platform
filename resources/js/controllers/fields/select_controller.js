@@ -5,6 +5,7 @@ export default class extends Controller {
      *
      */
     connect() {
+
         if (document.documentElement.hasAttribute('data-turbolinks-preview')) {
             return;
         }

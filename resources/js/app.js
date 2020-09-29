@@ -4,13 +4,17 @@ import platform from "./platform";
 
 global.$ = global.jQuery = require('jquery');
 
+
 require('popper.js');
-require('bootstrap');
 require('select2');
 
 window.platform = platform();
 window.application = Application.start();
 window.Controller = Controller;
 
-const context = require.context('./controllers', true, /\.js$/);
-application.load(definitionsFromContext(context));
+window.onload = function() {
+    require('bootstrap');
+
+    const context = require.context('./controllers', true, /\.js$/);
+    application.load(definitionsFromContext(context));
+};

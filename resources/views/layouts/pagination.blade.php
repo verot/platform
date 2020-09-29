@@ -1,5 +1,5 @@
 <footer class="pb-3 w-100">
-    <div class="v-md-center">
+    <div class="v-md-center px-4">
         <div class="col-sm-5">
             @if($paginator instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
 

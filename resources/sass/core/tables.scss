@@ -49,7 +49,14 @@
       }
     }
   }
+
+  &.matrix {
+    td, th {
+      border: 1px solid $light;
+    }
+  }
 }
+
 
 .fht-table {
   margin-bottom: 0 !important;

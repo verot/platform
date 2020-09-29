@@ -1,5 +1,5 @@
 @component($typeForm, get_defined_vars())
-    <table class="matrix table table-bordered border-right-0"
+    <table class="matrix table border-right-0"
            data-controller="fields--matrix"
            data-fields--matrix-index="{{ $index }}"
            data-fields--matrix-rows="{{ $maxRows }}"
@@ -21,13 +21,13 @@
         @endforeach
 
         <tr class="add-row">
-            <th colspan="{{ count($columns) }}" class="text-center p-0">
+            <td colspan="{{ count($columns) }}" class="text-center p-0">
                 <a href="#" data-action="fields--matrix#addRow" class="btn btn-block text-xs text-muted">
                     <x-orchid-icon path="plus-alt"/>
 
                     <span>{{ __('Add row') }}</span>
                 </a>
-            </th>
+            </td>
         </tr>
 
         <template>

@@ -1,5 +1,5 @@
 <div class="d-block bg-white rounded shadow-sm mb-3">
-    <div class="row no-gutters">
+    <div class="row g-0">
 
             @empty(!$image)
                 <div class="col-md-4">

@@ -1,7 +1,7 @@
 <div class="bg-white rounded-top shadow-sm mb-3">
 
 
-    <div class="row no-gutters">
+    <div class="row g-0">
         <div class="col col-lg-8 mt-6 p-4 pr-md-0">
 
             <h2 class="mt-2 text-dark font-weight-light">
