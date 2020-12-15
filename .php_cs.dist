@@ -9,7 +9,7 @@ $finder = Symfony\Component\Finder\Finder::create()
         __DIR__ . '/tests',
         __DIR__ . '/stubs',
     ])
-    ->name(['*.php', '*.stub'])
+    ->name('*.php')
     ->notName('*.blade.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
