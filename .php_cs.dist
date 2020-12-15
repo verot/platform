@@ -9,7 +9,7 @@ $finder = Symfony\Component\Finder\Finder::create()
         __DIR__ . '/tests',
         __DIR__ . '/stubs',
     ])
-    ->name('*.php')
+    ->name(['*.php', '*.stub'])
     ->notName('*.blade.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
@@ -28,8 +28,12 @@ return PhpCsFixer\Config::create()
         'blank_line_before_statement' => [
             'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
         ],
+        'phpdoc_separation' => true
+        'phpdoc_align' => true,
+        'phpdoc_order' => true,
         'phpdoc_single_line_var_spacing' => true,
         'phpdoc_var_without_name' => true,
+        'phpdoc_separation' => true,
         'class_attributes_separation' => [
             'elements' => [
                 'method',
@@ -41,5 +45,8 @@ return PhpCsFixer\Config::create()
         ],
         'single_trait_insert_per_statement' => true,
         'align_double_arrow' => true,
+        'no_spaces_outside_offset' => true,
+        'blank_line_before_throw' => true,
+        'blank_line_before_try' => true,
     ])
     ->setFinder($finder);
