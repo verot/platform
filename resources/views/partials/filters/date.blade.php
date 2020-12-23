@@ -8,11 +8,11 @@
         <x-orchid-icon path="filter"/>
     </button>
     <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
-        <div class="wrapper-sm">
+        <div class="py-2 px-3">
 
             <input class="d-none" name="filter[{{$column}}]"
-                   data-controller="fields--datetime"
-                   data-fields--datetime-inline="true"
+                   data-controller="datetime"
+                   data-datetime-inline="true"
                    value="{{get_filter_string($column)}}"
                    form="filters"
                    placeholder="{{ __('Filter') }}"

@@ -15,6 +15,7 @@ use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Password;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
@@ -25,14 +26,14 @@ class UserProfileScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Profile';
+    public $name = 'My account';
 
     /**
      * Display header description.
      *
      * @var string
      */
-    public $description = 'Basic information';
+    public $description = 'Update your account details such as name, email address and password';
 
     /**
      * @var User
@@ -62,20 +63,7 @@ class UserProfileScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [
-            DropDown::make(__('Settings'))
-                ->icon('open')
-                ->list([
-                    ModalToggle::make(__('Change Password'))
-                        ->icon('lock-open')
-                        ->method('changePassword')
-                        ->modal('password'),
-                ]),
-
-            Button::make(__('Save'))
-                ->icon('check')
-                ->method('save'),
-        ];
+        return [];
     }
 
     /**
@@ -84,28 +72,40 @@ class UserProfileScreen extends Screen
     public function layout(): array
     {
         return [
-            UserEditLayout::class,
+            Layout::block(UserEditLayout::class)
+                ->title(__('Profile Information'))
+                ->description(__('Update your account\'s profile information and email address.'))
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::DEFAULT())
+                        ->icon('check')
+                        ->method('save')
+                ),
 
-            Layout::modal('password', Layout::rows([
+
+            Layout::block(Layout::rows([
                 Password::make('old_password')
                     ->placeholder(__('Enter the current password'))
-                    ->required()
                     ->title(__('Old password'))
                     ->help('This is your password set at the moment.'),
 
                 Password::make('password')
                     ->placeholder(__('Enter the password to be set'))
-                    ->required()
                     ->title(__('New password')),
 
                 Password::make('password_confirmation')
                     ->placeholder(__('Enter the password to be set'))
-                    ->required()
                     ->title(__('Confirm new password'))
                     ->help('A good password is at least 15 characters or at least 8 characters long, including a number and a lowercase letter.'),
             ]))
-                ->title(__('Change Password'))
-                ->applyButton(__('Update password')),
+                ->title(__('Update Password'))
+                ->description(__('Ensure your account is using a long, random password to stay secure.'))
+                ->commands(
+                    Button::make(__('Change Password'))
+                        ->type(Color::DEFAULT())
+                        ->icon('check')
+                        ->method('save')
+                ),
         ];
     }
 

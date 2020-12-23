@@ -1,6 +1,6 @@
 <button formaction="{{ url()->current() }}/{{ $notification->id }}/maskNotification" class="btn btn-link text-left p-4">
 
-    <span class="align-self-start text-{{ $notification->data['type'] }} @if($notification->read()) opacity @endif pull-left m-t-sm text-xs">
+    <span class="align-self-start text-{{ $notification->data['type'] }} @if($notification->read()) opacity @endif pull-left m-t-sm small">
         <x-orchid-icon path="circle" class="mr-2"/>
     </span>
 

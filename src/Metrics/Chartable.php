@@ -57,8 +57,7 @@ trait Chartable
             DB::raw("$value as value"),
             DB::raw("DATE($dateColumn) as label")
         )
-            ->where($dateColumn, '>=', $startDate)
-            ->where($dateColumn, '<=', $stopDate)
+            ->whereBetween($dateColumn, [$startDate, $stopDate])
             ->orderBy('label', 'asc')
             ->groupBy('label')
             ->get();
