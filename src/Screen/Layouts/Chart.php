@@ -147,7 +147,7 @@ abstract class Chart extends Layout
         }
 
         $labels = ! empty($this->labels)
-            ? json_encode(collect($this->labels))
+            ? json_encode(collect($this->labels), JSON_THROW_ON_ERROR)
             : collect($repository->getContent($this->target))
                 ->map(function ($item) {
                     return $item['labels'] ?? [];
@@ -164,12 +164,12 @@ abstract class Chart extends Layout
             'labels'           => $labels,
             'export'           => $this->export,
             'data'             => json_encode($repository->getContent($this->target), JSON_NUMERIC_CHECK),
-            'colors'           => json_encode($this->colors),
-            'maxSlices'        => json_encode($this->maxSlices),
-            'valuesOverPoints' => json_encode($this->valuesOverPoints),
-            'axisOptions'      => json_encode($this->axisOptions),
-            'barOptions'       => json_encode($this->barOptions),
-            'lineOptions'      => json_encode($this->lineOptions),
+            'colors'           => json_encode($this->colors, JSON_THROW_ON_ERROR),
+            'maxSlices'        => json_encode($this->maxSlices, JSON_THROW_ON_ERROR),
+            'valuesOverPoints' => json_encode($this->valuesOverPoints, JSON_THROW_ON_ERROR),
+            'axisOptions'      => json_encode($this->axisOptions, JSON_THROW_ON_ERROR),
+            'barOptions'       => json_encode($this->barOptions, JSON_THROW_ON_ERROR),
+            'lineOptions'      => json_encode($this->lineOptions, JSON_THROW_ON_ERROR),
         ]);
     }
 }

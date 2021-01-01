@@ -150,7 +150,10 @@ class SearchScreen extends Screen
 
                 $this->total += $result->total();
 
-                return compact('label', 'result');
+                return [
+                    'label' => $label,
+                    'result' => $result
+                ];
             })
             ->filter();
 

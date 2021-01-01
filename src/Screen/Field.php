@@ -277,7 +277,7 @@ class Field implements Fieldable
 
         $lang = $this->get('lang');
         $slug = $this->get('name');
-        $hash = sha1(json_encode($this->getAttributes()));
+        $hash = sha1(json_encode($this->getAttributes(), JSON_THROW_ON_ERROR));
 
         return Str::slug("field-$lang-$slug-$hash");
     }

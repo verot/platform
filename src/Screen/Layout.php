@@ -135,7 +135,7 @@ abstract class Layout implements JsonSerializable
     {
         $screen = Dashboard::getCurrentScreen();
 
-        if (! $screen) {
+        if ($screen === null) {
             return null;
         }
 
@@ -188,7 +188,7 @@ abstract class Layout implements JsonSerializable
      */
     public function getSlug(): string
     {
-        return sha1(json_encode($this));
+        return sha1(json_encode($this, JSON_THROW_ON_ERROR));
     }
 
     /**

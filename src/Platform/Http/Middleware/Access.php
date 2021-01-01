@@ -48,7 +48,7 @@ class Access
             return $this->redirectToLogin($request);
         }
 
-        if ($this->auth->user()->hasAccess($permission)) {
+        if ($this->auth->user()->hasAccess($permission) !== null) {
             return $next($request);
         }
 

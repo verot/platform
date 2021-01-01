@@ -142,6 +142,6 @@ class Select extends Field
 
     public function taggable()
     {
-        return $this->set('tags', true);
+        return $this->set('tags');
     }
 }

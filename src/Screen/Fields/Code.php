@@ -98,7 +98,7 @@ class Code extends Field
         $this->addBeforeRender(function () {
             if ($this->get('language') === 'json') {
                 $value = $this->get('value');
-                $this->set('value', json_encode($value));
+                $this->set('value', json_encode($value, JSON_THROW_ON_ERROR));
             }
         });
     }

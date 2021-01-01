@@ -263,7 +263,7 @@ class TD
      */
     public function buildTd($repository)
     {
-        $value = $this->render
+        $value = $this->render !== null
             ? $this->handler($repository)
             : $repository->getContent($this->name);
 

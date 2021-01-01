@@ -28,11 +28,9 @@ class InstallCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param Dashboard $dashboard
-     *
      * @return void
      */
-    public function handle(Dashboard $dashboard)
+    public function handle()
     {
         $this->info('Installation started. Please wait...');
         $this->info('Version: '.Dashboard::VERSION);
@@ -77,7 +75,7 @@ class InstallCommand extends Command
             $this->alert($exception->getMessage());
         }
 
-        if ($result) {
+        if ($result !== 0) {
             $parameters = http_build_query($parameters, '', ' ');
             $parameters = str_replace('%5C', '/', $parameters);
             $this->alert("An error has occurred. The '{$command} {$parameters}' command was not executed");

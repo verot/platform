@@ -172,7 +172,7 @@ class Dashboard
     {
         $current = dirname(__DIR__, 2);
 
-        return realpath($current.($path ? DIRECTORY_SEPARATOR.$path : $path));
+        return realpath($current.($path !== '' ? DIRECTORY_SEPARATOR.$path : $path));
     }
 
     /**
@@ -273,7 +273,7 @@ class Dashboard
         }
 
         return $all->map(static function ($group) use ($removed) {
-            foreach ($group[key($group)] as $key => $item) {
+            foreach ($group[key($group)] as $item) {
                 if ($removed->contains($item)) {
                     unset($group[key($group)]);
                 }

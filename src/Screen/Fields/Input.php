@@ -102,7 +102,7 @@ class Input extends Field
             $mask = $this->get('mask');
 
             if (is_array($mask)) {
-                $this->set('mask', json_encode($mask));
+                $this->set('mask', json_encode($mask, JSON_THROW_ON_ERROR));
             }
         });
     }

@@ -180,11 +180,7 @@ class HttpFilter
             return true;
         }
 
-        if ($this->sorts->search('-'.$property, true) !== false) {
-            return true;
-        }
-
-        return false;
+        return $this->sorts->search('-'.$property, true) !== false;
     }
 
     /**

@@ -146,7 +146,7 @@ class Relation extends Field
             $value = $this->get('value');
 
             if (empty($value)) {
-                return $this->set('value', json_encode($value));
+                return $this->set('value', json_encode($value, JSON_THROW_ON_ERROR));
             }
 
             $scope = $this->get('scope', 'handler');

@@ -40,7 +40,7 @@ abstract class Wrapper extends Layout
             ->map(function ($layout, $key) use ($repository) {
                 $items = $this->buildChild(Arr::wrap($layout), $key, $repository);
 
-                return ! is_array($layout) ? reset($items)[0] : reset($items);
+                return is_array($layout) ? reset($items) : reset($items)[0];
             })
             ->merge($repository->all())
             ->all();
