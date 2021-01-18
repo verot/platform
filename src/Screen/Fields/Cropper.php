@@ -30,6 +30,8 @@ namespace Orchid\Screen\Fields;
  * @method Cropper popover(string $value = null)
  * @method Cropper title(string $value = null)
  * @method Cropper maxFileSize($value = true)
+ * @method Cropper imageFormat($value = null)
+ * @method Cropper jpegQuality($value = null)
  * @method Cropper storage($value = null)
  * @method Cropper staticBackdrop($value = false)
  */
@@ -56,6 +58,8 @@ class Cropper extends Picture
         'maxWidth'      => 'Infinity',
         'maxHeight'     => 'Infinity',
         'maxFileSize'   => null,
+        'imageFormat'   => 'image/jpeg',
+        'jpegQuality'   => 80,
         'staticBackdrop'=> false,
     ];
 
@@ -171,4 +175,34 @@ class Cropper extends Picture
 
         return $this;
     }
+
+    /**
+     * Set the image format (MIME type) of the resized image.
+     *
+     * @param string $mime
+     *
+     * @return self
+     */
+    public function imageFormat(string $mime): self
+    {
+        $this->set('imageFormat', $mime);
+
+        return $this;
+    }
+
+    /**
+     * Set the JPEG compression quality of the resized image.
+     *
+     * @param int $quality
+     *
+     * @return self
+     */
+    public function jpegQuality(int $quality): self
+    {
+        $this->set('jpegQuality', $quality);
+
+        return $this;
+    }
+
+
 }

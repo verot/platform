@@ -11,6 +11,8 @@
          data-fields--cropper-target="{{ $target }}"
          data-fields--cropper-url="{{ $url }}"
          data-fields--cropper-max-file-size="{{ $maxFileSize }}"
+         data-fields--cropper-image-format="{{ $imageFormat }}"
+         data-fields--cropper-jpeg-quality="{{ $jpegQuality }}"
     >
         <div class="border-dashed text-right p-3 cropper-actions">
 

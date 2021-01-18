@@ -83,6 +83,9 @@ export default class extends Controller {
      */
     crop() {
 
+        let imageFormat = this.data.get('image-format');
+        let jpegQuality = this.data.get('jpeg-quality');
+
         this.cropper.getCroppedCanvas({
             width: this.data.get('width'),
             height: this.data.get('height'),
@@ -113,7 +116,7 @@ export default class extends Controller {
                     window.platform.alert('Validation error', 'File upload error');
                     console.warn(error);
                 });
-        });
+        }, imageFormat, jpegQuality);
 
     }
 
