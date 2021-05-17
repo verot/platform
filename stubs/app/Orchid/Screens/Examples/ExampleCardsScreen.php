@@ -8,9 +8,9 @@ use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Contracts\Cardable;
 use Orchid\Screen\Layouts\Card;
-use Orchid\Screen\Layouts\Compendium;
 use Orchid\Screen\Layouts\Facepile;
 use Orchid\Screen\Screen;
+use Orchid\Screen\Sight;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
@@ -32,6 +32,7 @@ class ExampleCardsScreen extends Screen
     public function query(): array
     {
         return [
+            'user' => User::firstOrFail(),
             'card' => new class implements Cardable {
                 /**
                  * @return string
@@ -47,10 +48,11 @@ class ExampleCardsScreen extends Screen
                 public function description(): string
                 {
                     return 'This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer. This is a wider card with supporting text below as
-                            a natural lead-in to additional content. This content is a little bit longer.
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.';
+                            This content is a little bit longer. Mauris a orci congue, placerat lorem ac, aliquet est.
+                            Etiam bibendum, urna et hendrerit molestie, risus est tincidunt lorem, eu suscipit tellus
+                            odio vitae nulla. Sed a cursus ipsum. Maecenas quis finibus libero. Phasellus a nibh rutrum,
+                            molestie orci sit amet, euismod ex. Donec finibus sodales magna, quis fermentum augue
+                            pretium ac.';
                 }
 
                 /**
@@ -62,7 +64,7 @@ class ExampleCardsScreen extends Screen
                 }
 
                 /**
-                 * @return mixed
+                 * @return \Orchid\Support\Color|string
                  */
                 public function color(): ?Color
                 {
@@ -70,54 +72,7 @@ class ExampleCardsScreen extends Screen
                 }
 
                 /**
-                 * {@inheritdoc}
-                 */
-                public function status(): ?Color
-                {
-                    return Color::INFO();
-                }
-            },
-            'cardCompendium' => new class implements Cardable {
-                /**
-                 * @return string
-                 */
-                public function title(): string
-                {
-                    return 'Kenmore 94149 Electric Range';
-                }
-
-                /**
-                 * @return string
-                 */
-                public function description(): string
-                {
-                    return new Compendium([
-                        'Type'                               => 'electric stove',
-                        'Model'                              => 'dream 251CH',
-                        'Main color'                         => 'white',
-                        'Complementary color'                => 'none',
-                        'Color declared by the manufacturer' => 'white',
-                    ]);
-                }
-
-                /**
-                 * @return string
-                 */
-                public function image(): ?string
-                {
-                    return null;
-                }
-
-                /**
-                 * @return mixed
-                 */
-                public function color(): ?Color
-                {
-                    return Color::SUCCESS();
-                }
-
-                /**
-                 * {@inheritdoc}
+                 * @return \Orchid\Support\Color|string
                  */
                 public function status(): ?Color
                 {
@@ -190,38 +145,56 @@ class ExampleCardsScreen extends Screen
     public function layout(): array
     {
         return [
-            new Card('card', [
-                Button::make('Example Button')
-                    ->method('showToast')
-                    ->icon('bag'),
-                Button::make('Example Button')
-                    ->method('showToast')
-                    ->icon('bag'),
-            ]),
-
             Layout::columns([
-                new Card('cardPersona'),
-                new Card('cardPersona', [
+                [
+                    new Card('cardPersona'),
+                    new Card('cardPersona', [
+                        Button::make('Example Button')
+                            ->method('showToast')
+                            ->icon('bag'),
+
+                        Button::make('Example Button')
+                            ->method('showToast')
+                            ->icon('bag'),
+                    ]),
+                ],
+                new Card('card', [
                     Button::make('Example Button')
                         ->method('showToast')
                         ->icon('bag'),
-
                     Button::make('Example Button')
                         ->method('showToast')
                         ->icon('bag'),
                 ]),
             ]),
 
-            Layout::block(new Card('cardPersona')),
-
-            new Card('cardCompendium'),
+            Layout::legend('user', [
+                Sight::make('id'),
+                Sight::make('name'),
+                Sight::make('email'),
+                Sight::make('email_verified_at', 'Email Verified')->render(function (User $user) {
+                    return $user->email_verified_at === null
+                        ? '<i class="text-danger">●</i> False'
+                        : '<i class="text-success">●</i> True';
+                }),
+                Sight::make('created_at', 'Created'),
+                Sight::make('updated_at', 'Updated'),
+                Sight::make('Simple Text')->render(function () {
+                    return 'This is a wider card with supporting text below as a natural lead-in to additional content.
+    This content is a little bit longer. Mauris a orci congue, placerat lorem ac, aliquet est.
+    Etiam bibendum, urna et hendrerit molestie, risus est tincidunt lorem, eu suscipit tellus
+            odio vitae nulla. Sed a cursus ipsum. Maecenas quis finibus libero. Phasellus a nibh rutrum,
+            molestie orci sit amet, euismod ex. Donec finibus sodales magna, quis fermentum augue
+            pretium ac.';
+                }),
+            ])->title('User'),
         ];
     }
 
     /**
      * @param Request $request
      */
-    public function showToast(Request $request)
+    public function showToast(Request $request): void
     {
         Toast::warning($request->get('toast', 'Hello, world! This is a toast message.'));
     }

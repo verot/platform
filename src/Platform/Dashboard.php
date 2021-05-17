@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
+use Orchid\Screen\Actions\Menu;
 use Orchid\Screen\Screen;
 
 class Dashboard
@@ -17,7 +18,17 @@ class Dashboard
     /**
      * ORCHID Version.
      */
-    public const VERSION = '9.18.1';
+    public const VERSION = '10.3.0';
+
+    /**
+     * Slug for main menu.
+     */
+    public const MENU_MAIN = 'Main';
+
+    /**
+     * Slug for dropdown profile.
+     */
+    public const MENU_PROFILE = 'Profile';
 
     /**
      * The Dashboard configuration options.
@@ -27,7 +38,7 @@ class Dashboard
     protected static $options = [];
 
     /**
-     * @var Menu
+     * @var Collection
      */
     public $menu;
 
@@ -65,7 +76,11 @@ class Dashboard
      */
     public function __construct()
     {
-        $this->menu = new Menu();
+        $this->menu = collect([
+            self::MENU_MAIN    => collect(),
+            self::MENU_PROFILE => collect(),
+        ]);
+
         $this->permission = collect([
             'all'     => collect(),
             'removed' => collect(),
@@ -253,14 +268,6 @@ class Dashboard
     }
 
     /**
-     * @return Menu
-     */
-    public function menu(): Menu
-    {
-        return $this->menu;
-    }
-
-    /**
      * @return Collection
      */
     public function getPermission(): Collection
@@ -348,5 +355,66 @@ class Dashboard
     public function getCurrentScreen(): ?Screen
     {
         return $this->currentScreen;
+    }
+
+    /**
+     * Adding a new element to the menu.
+     *
+     * @param string                      $location
+     * @param \Orchid\Screen\Actions\Menu $menu
+     *
+     * @return $this
+     */
+    public function registerMenuElement(string $location, \Orchid\Screen\Actions\Menu $menu): Dashboard
+    {
+        if ($menu->get('sort', 0) === 0) {
+            $menu->sort($this->menu->get($location)->count() + 1);
+        }
+
+        $this->menu->get($location)->add($menu);
+
+        return $this;
+    }
+
+    /**
+     * Generate on the menu display.
+     *
+     * @param string $location
+     *
+     * @throws \Throwable
+     *
+     * @return string
+     */
+    public function renderMenu(string $location): string
+    {
+        return $this->menu->get($location)
+            ->sort(function (Menu $current, Menu $next) {
+                return $current->get('sort', 0) <=> $next->get('sort', 0);
+            })
+            ->map(function (Menu $menu) {
+                return (string)$menu->render();
+            })
+            ->implode('');
+    }
+
+    /**
+     * @param string $location
+     * @param string $slug
+     * @param Menu[] $list
+     *
+     * @return Dashboard
+     */
+    public function addMenuSubElements(string $location, string $slug, array $list): Dashboard
+    {
+        $menu = $this->menu->get($location)
+            ->map(function (Menu $menu) use ($slug, $list) {
+                return $menu->get('slug') === $slug
+                    ? $menu->list($list)
+                    : $menu;
+            });
+
+        $this->menu->put($location, $menu);
+
+        return $this;
     }
 }

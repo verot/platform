@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="mb-3">
 
     <label class="form-label">
         {{__('Email address')}}
@@ -13,7 +13,7 @@
     !!}
 </div>
 
-<div class="form-group">
+<div class="mb-3">
     <label class="form-label w-100">
         {{__('Password')}}
     </label>
@@ -25,18 +25,18 @@
     !!}
 </div>
 
-<div class="row">
-    <div class="form-group col-md-6 col-xs-12">
-        <label class="custom-control custom-checkbox">
+<div class="row align-items-center">
+    <div class="mb-3 col-md-6 col-xs-12">
+        <label class="form-check">
             <input type="hidden" name="remember">
             <input type="checkbox" name="remember" value="true"
-                   class="custom-control-input" {{ !old('remember') || old('remember') === 'true'  ? 'checked' : '' }}>
-            <span class="custom-control-label"> {{__('Remember Me')}}</span>
+                   class="form-check-input" {{ !old('remember') || old('remember') === 'true'  ? 'checked' : '' }}>
+            <span class="form-check-label"> {{__('Remember Me')}}</span>
         </label>
     </div>
-    <div class="form-group col-md-6 col-xs-12">
+    <div class="mb-3 col-md-6 col-xs-12">
         <button id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
-            <x-orchid-icon path="login" class="text-xs mr-2"/>
+            <x-orchid-icon path="login" class="small me-2"/>
             {{__('Login')}}
         </button>
     </div>

@@ -14,6 +14,7 @@ use Orchid\Screen\Fields\Map;
 use Orchid\Screen\Fields\Matrix;
 use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\RadioButtons;
+use Orchid\Screen\Fields\Range;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Switcher;
@@ -201,6 +202,32 @@ class ExampleFieldsAdvancedScreen extends Screen
             ]),
 
             Layout::rows([
+                Group::make([
+                    Range::make('range')
+                        ->title('Example range')
+                        ->max(5)
+                        ->min(0)
+                        ->step(1)
+                        ->help('The track and thumb are both styled to appear the same across browsers.'),
+
+                    Range::make('range_disabled')
+                        ->title('Disabled range')
+                        ->disabled(),
+                ]),
+            ])->title('Range'),
+
+            Layout::rows([
+
+                Input::make('raw_file')
+                    ->type('file')
+                    ->title('File input example')
+                    ->horizontal(),
+
+                Input::make('raw_files')
+                    ->type('file')
+                    ->title('Multiple files input example')
+                    ->multiple()
+                    ->horizontal(),
 
                 Picture::make('picture')
                     ->title('Picture')

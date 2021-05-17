@@ -170,38 +170,27 @@ class ExampleFieldsScreen extends Screen
                     Button::make('Default')->method('buttonClickProcessing')->type(Color::DEFAULT()),
                     Button::make('Link')->method('buttonClickProcessing')->type(Color::LINK()),
                 ])->autoWidth(),
-
-
-                Button::make('Block level button')
-                    ->method('buttonClickProcessing')
-                    ->type(Color::DEFAULT())
-                    ->block(),
-
-                Button::make('Right button')
-                    ->method('buttonClickProcessing')
-                    ->type(Color::DEFAULT())
-                    ->right(),
             ])->title('Buttons'),
 
             Layout::rows([
                 Input::make('test')
                     ->title('Text')
                     ->value('Artisanal kale')
-                    ->help('Elements of type text create basic single-line text fields.')
+                    ->help('Basic single-line text fields.')
                     ->horizontal(),
 
                 Input::make('search')
                     ->type('search')
                     ->title('Search')
                     ->value('How do I shoot web')
-                    ->help('Elements of type search are text fields designed for the user to enter search queries into.')
+                    ->help('Text fields designed for the user to enter search queries into.')
                     ->horizontal(),
 
                 Input::make('email')
                     ->type('email')
                     ->title('Email')
                     ->value('bootstrap@example.com')
-                    ->help('Elements of type email are used to let the user enter and edit an e-mail address')
+                    ->help('Used to let the user enter and edit an e-mail address')
                     ->horizontal(),
 
                 Input::make('url')
@@ -216,9 +205,10 @@ class ExampleFieldsScreen extends Screen
                     ->title('Telephone')
                     ->value('1-(555)-555-5555')
                     ->horizontal()
-                    ->help('For example, on iOS, focusing input on a telephone field brings up
-                     a numeric keypad ready for keying in a number. In addition, the device’s autocomplete
-                      mechanisms kick in and suggest phone numbers that can be autofilled with a single tap.'),
+                    ->popover('The device’s autocomplete mechanisms kick in and suggest
+                        phone numbers that can be autofilled with a single tap.')
+                    ->help('Focusing input on a telephone field brings up
+                        a numeric keypad ready for keying in a number.'),
 
                 Input::make('password')
                     ->type('password')
@@ -261,6 +251,20 @@ class ExampleFieldsScreen extends Screen
                     ->title('Time')
                     ->value('13:45:00')
                     ->horizontal(),
+
+                Input::make('datalist')
+                    ->title('Datalist example')
+                    ->help('Most browsers include some support for "datalist"
+                                 elements, their styling is inconsistent at best.')
+                    ->datalist([
+                        'San Francisco',
+                        'New York',
+                        'Seattle',
+                        'Los Angeles',
+                        'Chicago',
+                    ])
+                    ->horizontal(),
+
 
                 Input::make('color')
                     ->type('color')

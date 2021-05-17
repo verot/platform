@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Examples;
 
 use App\Orchid\Layouts\Examples\ChartBarExample;
+use App\Orchid\Layouts\Examples\ChartLineExample;
 use App\Orchid\Layouts\Examples\MetricsExample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -81,9 +82,8 @@ class ExampleScreen extends Screen
             'metrics' => [
                 ['keyValue' => number_format(6851, 0), 'keyDiff' => 10.08],
                 ['keyValue' => number_format(24668, 0), 'keyDiff' => -30.76],
-                ['keyValue' => number_format(65661, 2), 'keyDiff' => 3.84],
                 ['keyValue' => number_format(10000, 0), 'keyDiff' => 0],
-                ['keyValue' => number_format(1454887.12, 2)],
+                ['keyValue' => number_format(65661, 2), 'keyDiff' => 3.84],
             ],
         ];
     }
@@ -106,6 +106,12 @@ class ExampleScreen extends Screen
                 ->modal('exampleModal')
                 ->method('showToast')
                 ->icon('full-screen'),
+
+            Button::make('Export file')
+                ->method('export')
+                ->icon('cloud-download')
+                ->rawClick()
+                ->novalidate(),
 
             DropDown::make('Dropdown button')
                 ->icon('folder-alt')
@@ -136,7 +142,11 @@ class ExampleScreen extends Screen
     {
         return [
             MetricsExample::class,
-            ChartBarExample::class,
+
+            Layout::columns([
+                ChartLineExample::class,
+                ChartBarExample::class,
+            ]),
 
             Layout::table('table', [
                 TD::make('id', 'ID')
@@ -176,8 +186,32 @@ class ExampleScreen extends Screen
     /**
      * @param Request $request
      */
-    public function showToast(Request $request)
+    public function showToast(Request $request): void
     {
         Toast::warning($request->get('toast', 'Hello, world! This is a toast message.'));
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
+    public function export()
+    {
+        return response()->streamDownload(function () {
+            $csv = tap(fopen('php://output', 'wb'), function ($csv) {
+                fputcsv($csv, ['header:col1', 'header:col2', 'header:col3']);
+            });
+
+            collect([
+                ['row1:col1', 'row1:col2', 'row1:col3'],
+                ['row2:col1', 'row2:col2', 'row2:col3'],
+                ['row3:col1', 'row3:col2', 'row3:col3'],
+            ])->each(function (array $row) use ($csv) {
+                fputcsv($csv, $row);
+            });
+
+            return tap($csv, function ($csv) {
+                fclose($csv);
+            });
+        }, 'File-name.csv');
     }
 }

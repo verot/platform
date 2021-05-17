@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
 use Illuminate\View\ComponentAttributeBag;
 use Illuminate\View\View;
 use Orchid\Screen\Concerns\Makeable;
@@ -32,7 +33,9 @@ use Throwable;
  */
 class Field implements Fieldable
 {
-    use CanSee, Makeable;
+    use CanSee, Makeable, Macroable {
+        __call as macroCall;
+    }
 
     /**
      * A set of closure functions
@@ -120,10 +123,14 @@ class Field implements Fieldable
      * @param string $name
      * @param array  $arguments
      *
-     * @return static
+     * @return mixed|static
      */
-    public function __call(string $name, array $arguments): self
+    public function __call(string $name, array $arguments)
     {
+        if (static::hasMacro($name)) {
+            return $this->macroCall($name, $arguments);
+        }
+
         $arguments = collect($arguments)->map(static function ($argument) {
             return $argument instanceof Closure ? $argument() : $argument;
         });
@@ -320,7 +327,7 @@ class Field implements Fieldable
     {
         return (string) Str::of($this->get('name'))
             ->replace(['][', '['], '.')
-            ->replace([']'], '');
+            ->replace([']'], '')->rtrim('.');
     }
 
     /**
@@ -383,20 +390,6 @@ class Field implements Fieldable
         }
 
         return $this->set('value', $value);
-    }
-
-    /**
-     * @deprecated
-     *
-     * Create a group of the fields.
-     *
-     * @param Closure|array $group
-     *
-     * @return Group
-     */
-    public static function group($group): Group
-    {
-        return Group::make(is_callable($group) ? $group() : $group);
     }
 
     /**

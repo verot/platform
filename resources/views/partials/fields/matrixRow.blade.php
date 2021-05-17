@@ -6,7 +6,7 @@
                $fields[$column]
                     ->value($row[$column] ?? '')
                     ->prefix($name)
-                    ->id("$column-$key-$column")
+                    ->id("$idPrefix-$key-$column")
                     ->name($keyValue ? $column : "[$key][$column]")
             !!}
         </th>
@@ -14,8 +14,8 @@
         @if ($loop->last)
             <th class="no-border text-center align-middle">
                 <a href="#"
-                   data-action="fields--matrix#deleteRow"
-                   class="text-xs text-muted"
+                   data-action="matrix#deleteRow"
+                   class="small text-muted"
                    title="Remove row">
                     <x-orchid-icon path="trash"/>
                 </a>

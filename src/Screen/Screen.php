@@ -8,6 +8,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -65,7 +66,10 @@ abstract class Screen extends Controller
      *
      * @return Action[]
      */
-    abstract public function commandBar(): array;
+    public function commandBar()
+    {
+        return [];
+    }
 
     /**
      * Views.
@@ -220,26 +224,31 @@ abstract class Screen extends Controller
     private function bind(int $key, ReflectionParameter $parameter, array $httpQueryArguments)
     {
         $class = $parameter->getType() && ! $parameter->getType()->isBuiltin()
-           ? $parameter->getType()->getName()
-           : null;
+            ? $parameter->getType()->getName()
+            : null;
 
         $original = array_values($httpQueryArguments)[$key] ?? null;
 
-        if ($class === null) {
+        if ($class === null || is_object($original)) {
             return $original;
         }
 
-        if (is_object($original)) {
-            return $original;
+        $instance = resolve($class);
+
+        if ($original === null || ! is_a($instance, UrlRoutable::class)) {
+            return $instance;
         }
 
-        $object = resolve($class);
+        $model = $instance->resolveRouteBinding($original);
 
-        if ($original !== null && is_a($object, UrlRoutable::class)) {
-            return $object->resolveRouteBinding($original);
-        }
+        throw_if(
+            $model === null && ! $parameter->isDefaultValueAvailable(),
+            (new ModelNotFoundException())->setModel($class, [$original])
+        );
 
-        return $object;
+        optional(Route::current())->setParameter($parameter->getName(), $model);
+
+        return $model;
     }
 
     /**

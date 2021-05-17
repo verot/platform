@@ -1,6 +1,16 @@
+@empty(!$title)
+    <fieldset>
+            <div class="col p-0 px-3">
+                <legend class="text-black">
+                    {{ $title }}
+                </legend>
+            </div>
+    </fieldset>
+@endempty
+
 <div class="bg-white rounded shadow-sm mb-3"
-     data-controller="layouts--table"
-     data-layouts--table-slug="{{$slug}}"
+     data-controller="table"
+     data-table-slug="{{$slug}}"
 >
 
     <div class="table-responsive">
@@ -40,7 +50,7 @@
 
     @if($rows instanceof \Illuminate\Contracts\Pagination\Paginator && $rows->isEmpty())
         <div class="text-center py-5 w-100">
-            <h3 class="font-weight-light">
+            <h3 class="fw-light">
                 @isset($iconNotFound)
                     <x-orchid-icon :path="$iconNotFound" class="block m-b"/>
                 @endisset

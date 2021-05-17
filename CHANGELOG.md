@@ -4,6 +4,182 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 10.3.0 - 2021-05-07
+
+### Added
+- Browsing layout [#1716](https://github.com/orchidsoftware/platform/pull/1716)
+- Implemented additional flatpickr.js methods for DateTimer field. [#1711](https://github.com/orchidsoftware/platform/pull/1711)
+
+### Changed
+- Update PHP-CS-Fixer [#1721](https://github.com/orchidsoftware/platform/pull/1721)
+
+### Fixed
+- Modals `backdrop` for `Cropper/Picture` fields
+
+## 10.2.1 - 2021-04-30
+
+### Changed
+- Allow laravel/scout 9.x [#1712](https://github.com/orchidsoftware/platform/pull/1712)
+- Animation for modals
+- Demo screens appearance
+
+### Fixed
+- Show modal for Upload and change animation [#1715](https://github.com/orchidsoftware/platform/issues/1715)
+- Query string for filter clear button [#1704](https://github.com/orchidsoftware/platform/pull/1704)
+
+## 10.2.0 - 2021-04-24
+
+### Added
+- Autofocus for open dropdown [#1475](https://github.com/orchidsoftware/platform/issues/1475)
+- Method`serverFormat` for `DateTimer` field
+- Auto division group for `Upload` field
+
+### Changed
+- Allowed to send escape characters in the `SimpleMDE` field
+
+## 10.1.4 - 2021-04-23
+
+### Fixed
+- Add bottom padding for best view [#1688](https://github.com/orchidsoftware/platform/pull/1688)
+- Remove init bootstrap
+
+## 10.1.3 - 2021-04-23
+
+### Fixed
+- Old name from request [#1675](https://github.com/orchidsoftware/platform/pull/1675)
+- Pagination responsibility [#1681](https://github.com/orchidsoftware/platform/pull/1681)
+- Send filter multiple array [#1682](https://github.com/orchidsoftware/platform/pull/1682)
+- Color with table-striped [#1680](https://github.com/orchidsoftware/platform/issues/1680)
+- Menu sorting and active sub element
+
+## 10.1.2 - 2021-04-19
+
+### Fixed
+- Show `Select` field from modals
+
+## 10.1.1 - 2021-04-19
+
+### Fixed
+- Button `formmethod` attribute typo
+
+## 10.1.0 - 2021-04-19
+
+### Added
+- Missing attributes for Button class
+- Macroable trait to field class [#1678](https://github.com/orchidsoftware/platform/pull/1678)
+
+### Fixed
+-  Change old class selectors for Cropper/Picture
+
+## 10.0.2 - 2021-04-17
+
+### Fixed
+- Make submenu id equal to the slug [#1673](https://github.com/orchidsoftware/platform/pull/1673)
+- Remove namespace for `Date` field [#1672](https://github.com/orchidsoftware/platform/pull/1672)
+
+## 10.0.1 - 2021-04-15
+
+### Fixed
+- Sorting of elements menu [#1668](https://github.com/orchidsoftware/platform/pull/1668)
+
+## 10.0.0 - 2021-04-14
+
+### Added
+- Multiguard support [#1633](https://github.com/orchidsoftware/platform/pull/1633), [#1614](https://github.com/orchidsoftware/platform/pull/1614)
+- `Legend` layout and `Sight` class for simple view to display data [#1607](https://github.com/orchidsoftware/platform/issues/1607)
+- Turbo [#1473](https://github.com/orchidsoftware/platform/issues/1473)
+
+### Changed
+- Use a menu item as part of an `Action` [#1637](https://github.com/orchidsoftware/platform/issues/1637)
+- Using `canSee` and `isSee` [#1559](https://github.com/orchidsoftware/platform/issues/1559)
+- Updated `Bootstrap` version to v5.0.0-beta3 [#1152](https://github.com/orchidsoftware/platform/issues/1152)
+- Updated `Stimulus` version to 2.0 [#1389](https://github.com/orchidsoftware/platform/issues/1389)
+
+### Removed
+- The `Turbolinks` has been replaced in favor of a `Turbo`
+- The `Compendium` class has been removed. Recommend using a newer Legend.
+- The `Collapse` class has been removed.
+
+## 9.21.0 - 2021-04-10
+
+### Added
+- Translated missing text in Italian [#1653](https://github.com/orchidsoftware/platform/pull/1653)
+- Method `showMinDaysOfWeek` for `TimeCollection`
+
+## 9.20.1 - 2021-03-25
+
+### Fixed
+- Send filter multiple array
+
+## 9.20.0 - 2021-03-21
+
+### Added
+- Dutch translation [#1612](https://github.com/orchidsoftware/platform/pull/1612)
+
+### Fixed
+- Changed id prefix for Matrix [#1629](https://github.com/orchidsoftware/platform/pull/1629)
+- Type mismatch [#1577](https://github.com/orchidsoftware/platform/pull/1577)
+
+## 9.19.8 - 2021-02-19
+
+### Fixed
+- `orchid:admin` command doesn't accept values
+
+## 9.19.7 - 2021-02-10
+
+### Changed
+- Update dependencies
+
+## 9.19.6 - 2021-02-08
+
+### Fixed
+- `AsSource::getContent()` does not return virtual fields defined as Model Accessor [#1558](https://github.com/orchidsoftware/platform/issues/1558)
+
+## 9.19.5 - 2021-02-06
+
+### Fixed
+- Display of background notifications
+- Removed the default background value for `badge` [#1076](https://github.com/orchidsoftware/platform/issues/1076)
+
+## 9.19.4 - 2021-01-26
+
+### Fixed
+- Open link for Safari [#1539](https://github.com/orchidsoftware/platform/issues/1539)
+
+## 9.19.3 - 2021-01-26
+
+### Added
+- Added a log of changes to the menu
+
+### Changed
+- Reduced left menu width
+- Allow exit on Impersonation
+
+### Fixed
+- Field name for code
+
+## 9.19.2 - 2021-01-26
+
+### Fixed
+- Map related User model [#1544](https://github.com/orchidsoftware/platform/pull/1544)
+
+## 9.19.1 - 2021-01-26
+
+### Fixed
+- UserEditScreen stub more reasonable for CREATE [#1541](https://github.com/orchidsoftware/platform/pull/1541)
+
+## 9.19.0 - 2021-01-23
+
+### Added
+- Create new user via `Systems -> Users` screen [#1534](https://github.com/orchidsoftware/platform/pull/1534)
+
+### Changed
+- Use a dash instead of blank percentages with an icon.
+
+### Fixed
+- Hide file download link for non-public storage [#1533](https://github.com/orchidsoftware/platform/pull/1533)
+- Wiping user roles when updating user via oneAsyncModal [#1535](https://github.com/orchidsoftware/platform/pull/1535)
+
 ## 9.18.1 - 2021-01-20
 
 ### Changed

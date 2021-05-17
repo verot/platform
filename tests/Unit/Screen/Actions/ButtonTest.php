@@ -64,7 +64,7 @@ class ButtonTest extends TestFieldsUnitCase
         $view = self::renderField($button);
 
         $this->assertStringContainsString(
-            'data-turbolinks="false"',
+            'data-turbo="false"',
             $view
         );
     }
@@ -78,7 +78,7 @@ class ButtonTest extends TestFieldsUnitCase
         $view = self::renderField($button);
 
         $this->assertStringContainsString(
-            'data-turbolinks="true"',
+            'data-turbo="true"',
             $view
         );
     }
@@ -86,12 +86,12 @@ class ButtonTest extends TestFieldsUnitCase
     public function testButtonForCustomAction(): void
     {
         $buttonForRoute = Button::make('About')
-            ->action(route('platform.systems.index'));
+            ->action(route('platform.index'));
 
         $view = self::renderField($buttonForRoute);
 
         $this->assertStringContainsString(
-            'formaction="http://127.0.0.1:8001/dashboard/systems"',
+            'formaction="http://127.0.0.1:8001/dashboard"',
             $view
         );
 
