@@ -1,21 +1,22 @@
-<div class="row m-0 align-items-center p-3">
-    <div class="dropdown col p-0">
+<div class="d-flex m-0 align-items-center p-3">
+    <div class="dropdown w-75">
         <a href="#" class="nav-link p-0 d-flex align-items-center" data-bs-toggle="dropdown">
             @if($image = Auth::user()->presenter()->image())
                 <span class="thumb-sm avatar me-3">
                         <img src="{{$image}}" class="b">
                 </span>
             @endif
-            <span style="width:12em;font-size: 0.85em;">
-                <span class="text-ellipsis">{{Auth::user()->presenter()->title()}}</span>
+            <span class="d-block small">
+                <span class="text-ellipsis text-white" style="max-width: 12em;">{{Auth::user()->presenter()->title()}}</span>
                 <span class="text-muted d-block text-ellipsis">{{Auth::user()->presenter()->subTitle()}}</span>
             </span>
         </a>
         <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow bg-white">
 
-            {!! Dashboard::renderMenu('Profile','platform::partials.dropdownMenu') !!}
-
-            <div class="dropdown-divider"></div>
+            @unless(Dashboard::isEmptyMenu(\Orchid\Platform\Dashboard::MENU_PROFILE))
+                {!! Dashboard::renderMenu(\Orchid\Platform\Dashboard::MENU_PROFILE) !!}
+                <div class="dropdown-divider"></div>
+            @endunless
 
             @if(\Orchid\Access\UserSwitch::isSwitch())
                 <a href="#"

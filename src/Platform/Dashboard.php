@@ -18,7 +18,7 @@ class Dashboard
     /**
      * ORCHID Version.
      */
-    public const VERSION = '10.3.0';
+    public const VERSION = '10.4.2';
 
     /**
      * Slug for main menu.
@@ -395,6 +395,16 @@ class Dashboard
                 return (string)$menu->render();
             })
             ->implode('');
+    }
+
+    /**
+     * @param string $location
+     *
+     * @return bool
+     */
+    public function isEmptyMenu(string $location):bool
+    {
+        return $this->menu->get($location)->isEmpty();
     }
 
     /**
